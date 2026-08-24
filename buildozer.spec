@@ -9,7 +9,7 @@ source.include_patterns = icon.png,phone.dat,phone_parser.py,audio_gen.py,msyh.t
 
 version = 1.0
 
-requirements = python3,kivy==2.3.0
+requirements = python3==3.11.6,kivy==2.3.0
 
 # 安卓权限：网络（连接后台服务器）
 android.permissions = INTERNET,ACCESS_NETWORK_STATE
