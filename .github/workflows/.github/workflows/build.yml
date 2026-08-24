@@ -1,0 +1,44 @@
+name: 打包APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+  jobs:
+    build:
+        runs-on: ubuntu-latest
+            steps:
+                - uses: actions/checkout@v4
+
+                    - name: 设置Java
+                          uses: actions/setup-java@v4
+                                with:
+                                        distribution: 'temurin'
+                                                java-version: '17'
+
+                                                    - name: 设置Python
+                                                          uses: actions/setup-python@v5
+                                                                with:
+                                                                        python-version: '3.11'
+
+                                                                            - name: 安装系统依赖
+                                                                                  run: |
+                                                                                          sudo apt-get update
+                                                                                                  sudo apt-get install -y git zip unzip build-essential ccache automake libssl-dev libffi-dev autoconf libtool pkg-config cmake libstdc++6 libgl1-mesa-dev zlib1g-dev
+
+                                                                                                      - name: 安装Buildozer
+                                                                                                            run: |
+                                                                                                                    pip install --upgrade pip
+                                                                                                                            pip install buildozer cython==0.29.36
+                                                                                                                            
+                                                                                                                                - name: 打包APK
+                                                                                                                                      run: buildozer android debug
+                                                                                                                                            timeout-minutes: 60
+                                                                                                                                            
+                                                                                                                                                - name: 上传APK
+                                                                                                                                                      uses: actions/upload-artifact@v4
+                                                                                                                                                            with:
+                                                                                                                                                                    name: 电话APP
+                                                                                                                                                                            path: bin/*.apk
+                                                                                                                                                                            
