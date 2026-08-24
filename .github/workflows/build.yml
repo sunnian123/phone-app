@@ -45,12 +45,12 @@ jobs:
         timeout-minutes: 60
         continue-on-error: true
       - name: Show build errors
-        if: failure()
+        if: always()
         run: |
-          echo "=== Last 100 lines of buildozer.log ==="
-          tail -100 buildozer.log
+          echo "=== Last 200 lines of buildozer.log ==="
+          tail -200 buildozer.log
           echo "=== Searching for errors ==="
-          grep -i -E "error:|fatal|undefined reference|cannot find|No such file|exception" buildozer.log | tail -30 || true
+          grep -i -E "error:|fatal|undefined reference|cannot find|No such file|exception|Buildozer failed" buildozer.log | tail -50 || true
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
