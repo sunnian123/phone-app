@@ -20,6 +20,7 @@ android.orientation = portrait
 # 最低安卓版本
 android.minapi = 21
 android.api = 34
+android.buildtools = 34.0.0
 
 # 应用图标
 icon.filename = icon.png
