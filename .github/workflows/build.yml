@@ -57,8 +57,16 @@ jobs:
         with:
           name: build-log
           path: buildozer.log
+      - name: Find APK
+        if: always()
+        run: |
+          echo "=== Finding APK files ==="
+          find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+          echo "=== bin directory ==="
+          ls -la bin/ 2>/dev/null || echo "No bin directory"
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: phone-app
-          path: bin/*.apk
+          path: "**/*.apk"
