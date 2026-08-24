@@ -60,10 +60,17 @@ jobs:
       - name: Find APK
         if: always()
         run: |
-          echo "=== Finding APK files ==="
-          find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+          echo "=== Last 500 lines of buildozer.log ==="
+          tail -500 buildozer.log
+          echo "=== Finding APK files everywhere ==="
+          find / -name "*.apk" -type f 2>/dev/null | head -20
           echo "=== bin directory ==="
           ls -la bin/ 2>/dev/null || echo "No bin directory"
+          echo "=== .buildozer directory ==="
+          ls -la .buildozer/ 2>/dev/null || echo "No .buildozer directory"
+          echo "=== Current directory ==="
+          pwd
+          ls -la
       - name: Upload APK
         if: always()
         uses: actions/upload-artifact@v4
