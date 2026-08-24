@@ -60,15 +60,12 @@ jobs:
       - name: Find APK
         if: always()
         run: |
-          echo "=== First 100 lines of buildozer.log ==="
-          head -100 buildozer.log
-          echo "=== Last 100 lines of buildozer.log ==="
-          tail -100 buildozer.log
+          echo "=== Last 200 lines of buildozer.log ==="
+          tail -200 buildozer.log
+          echo "=== Error lines ==="
+          grep -i -E "error:|fatal|failed|exception|traceback|cannot|No such" buildozer.log | tail -30 || echo "No errors found"
           echo "=== bin directory ==="
           ls -la bin/ 2>/dev/null || echo "No bin directory"
-          echo "=== Current directory ==="
-          pwd
-          ls -la
       - name: Upload APK
         if: always()
         uses: actions/upload-artifact@v4
