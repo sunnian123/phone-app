@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip build-essential ccache automake libssl-dev libffi-dev autoconf libtool pkg-config cmake libstdc++6 libgl1-mesa-dev zlib1g-dev
+          sudo apt-get install -y git zip unzip build-essential ccache automake libssl-dev libffi-dev autoconf libtool libltdl-dev pkg-config cmake libstdc++6 libgl1-mesa-dev zlib1g-dev
       - name: Install Buildozer
         run: |
           pip install --upgrade pip
